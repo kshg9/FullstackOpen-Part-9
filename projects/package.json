@@ -1,0 +1,30 @@
+{
+  "name": "part9",
+  "version": "1.0.0",
+  "description": "-",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "calculateBmi": "ts-node calculateBmi.ts",
+    "calculateExercises": "ts-node calculateExercises.ts",
+    "dev": "ts-node-dev index.ts",
+    "lint": "eslint .",
+    "start": "ts-node index.ts"
+  },
+  "author": "zen",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.14.0",
+    "eslint": "^9.24.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.29.1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
