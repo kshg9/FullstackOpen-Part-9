@@ -40,9 +40,13 @@ import { Gender } from "./types";
 // };
 
 export const NewPatientSchema = z.object({
-  name: z.string(),
+  name: z.string().nonempty(),
   dateOfBirth: z.coerce.date(),
   ssn: z.string(),
   gender: z.nativeEnum(Gender),
   occupation: z.string(),
+});
+
+export const PatientSchema = NewPatientSchema.extend({
+  id: z.string().uuid(),
 });

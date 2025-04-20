@@ -1,30 +1,41 @@
 import express, { Request, Response } from "express";
 import patientsService from "../services/patientsService";
-import { NewPatientEntry, PreviewPatient } from "../types";
+import { NewPatientEntry, NonSensitivePatient, Patient } from "../types";
 import { NewPatientSchema } from "../utils";
 import { z } from "zod";
 
 const router = express.Router();
 
-router.get("/", (_req, res: Response<PreviewPatient[]>) => {
+router.get("/", (_req, res: Response<NonSensitivePatient[]>) => {
   res.send(patientsService.getNonSensitiveEntries());
 });
 
 router.post("/", (req: Request<NewPatientEntry>, res) => {
   try {
     const newPatient = NewPatientSchema.parse(req.body);
-    console.log(newPatient);
     const addedPatient = patientsService.addPatient(newPatient);
     res.json(addedPatient);
   } catch (error: unknown) {
     if (error instanceof z.ZodError) {
-      res.status(400).send({ error: error.issues });
+      const errorMessage = error.issues
+        .map((issue) => `${issue.path.join(".")}: ${issue.message}`)
+        .join(", ");
+      res.status(400).send(errorMessage); // Send string directly, not wrapped in object
+    } else if (error instanceof Error) {
+      res.status(400).send(error.message); // Send string directly
     } else {
-      res.status(400).send({ error: "unknown error" });
+      res.status(400).send("Unknown error occurred"); // Send string directly
     }
   }
 });
 
-// router.get("/:id", (req, res) => {});
+router.get("/:id", (req, res) => {
+  const patient: Patient = patientsService.getPatientById(req.params.id);
+  if (patient) {
+    res.send(patient);
+  } else {
+    res.status(404).send({ error: "Patient not found" });
+  }
+});
 
 export default router;
