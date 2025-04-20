@@ -1,0 +1,11 @@
+{
+  "name": "flight-diary",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "pnpm run -r --parallel --aggregate-output dev"
+  },
+  "dependencies": {
+    "@tanstack/react-form": "^1.6.3",
+    "axios": "^1.8.4"
+  }
+}
