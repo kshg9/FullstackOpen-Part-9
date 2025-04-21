@@ -74,13 +74,10 @@ const PatientListPage = ({ patients, setPatients }: Props) => {
         </TableHead>
         <TableBody>
           {Object.values(patients).map((patient: Patient) => (
-            <TableRow
-              key={patient.id}
-              component={Link}
-              to={`/patients/${patient.id}`}
-              sx={{ textDecoration: 'none' }}
-            >
-              <TableCell>{patient.name}</TableCell>
+            <TableRow key={patient.id} hover sx={{ cursor: 'pointer' }}>
+              <TableCell>
+                <Link to={`/patients/${patient.id}`}>{patient.name}</Link>
+              </TableCell>
               <TableCell>{patient.gender}</TableCell>
               <TableCell>{patient.occupation}</TableCell>
               <TableCell>

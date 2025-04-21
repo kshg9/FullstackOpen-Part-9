@@ -3,5 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "pnpm run -r --parallel --aggregate-output dev"
+  },
+  "dependencies": {
+    "@tanstack/react-form": "^1.6.3",
+    "@tanstack/react-query": "^5.74.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "frontend": "2.0.0-alpha.4"
   }
 }
